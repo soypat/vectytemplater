@@ -17,19 +17,27 @@ var (
 
 func main() {
 	if err := run(os.Args[1:]); err != nil {
-		fmt.Fprintln(os.Stderr, "error in run: ", err)
+		fmt.Fprintln(os.Stderr, "error in run:", err)
 		os.Exit(1)
 	}
 	fmt.Fprintln(os.Stdout, "finished succesfully")
 }
 
 func run(args []string) (err error) {
-	template := flag.String("t", "default", "template directory.")
-	err = flag.CommandLine.Parse(args)
+	if len(args) < 1 {
+		usage("")
+		return errors.New("no output directory specified")
+	}
+	template := flag.String("template", "default", "template name.")
+	err = flag.CommandLine.Parse(args[1:])
 	if err != nil {
 		return err
 	}
-
+	dir := args[0]
+	if _, err := os.Stat(dir); err == nil {
+		usage("")
+		return errors.New("cannot create directory \"" + dir + "\" as it already exists")
+	}
 	const perm os.FileMode = 0777
 	rebed.FolderMode = perm
 
@@ -42,7 +50,7 @@ func run(args []string) (err error) {
 	if err != nil {
 		return err
 	}
-	err = os.Rename("_templates/"+*template, *template)
+	err = os.Rename("_templates/"+*template, dir)
 	if err != nil {
 		return err
 	}
@@ -52,4 +60,10 @@ func run(args []string) (err error) {
 	}
 
 	return nil
+}
+
+func usage(command string) {
+	fmt.Fprintf(os.Stderr, "vectytemplater usage: %s output [-template=<name>]\n", os.Args[0])
+	fmt.Fprintln(os.Stderr, "flags:")
+	fmt.Fprintln(os.Stderr, "   template  template name. Available: [\"default\"]")
 }

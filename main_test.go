@@ -5,8 +5,6 @@ import (
 	"testing"
 )
 
-const dirperm = 0755
-
 func TestMain(t *testing.M) {
 	os.Mkdir("testdata", 0777)
 	err := os.Chdir("testdata")
@@ -26,7 +24,7 @@ func TestMain(t *testing.M) {
 }
 
 func TestRun(t *testing.T) {
-	err := run([]string{"vectytemplater"})
+	err := run([]string{"thedir"})
 	if err != nil {
 		t.Fatal(err)
 	}
