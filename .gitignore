@@ -1,4 +1,5 @@
 vectytemplater
+testdata/*
 
 # Binaries for programs and plugins
 *.exe
