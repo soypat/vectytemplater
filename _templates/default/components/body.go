@@ -4,9 +4,9 @@ import (
 	"github.com/hexops/vecty"
 	"github.com/hexops/vecty/elem"
 	"github.com/hexops/vecty/event"
-	"github.com/user/vecty-project/dispatcher"
 	"github.com/user/vecty-project/store"
 	"github.com/user/vecty-project/store/actions"
+	"github.com/user/vecty-project/store/dispatcher"
 )
 
 type Body struct {

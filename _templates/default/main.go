@@ -6,9 +6,9 @@ import (
 
 	"github.com/hexops/vecty"
 	"github.com/user/vecty-project/components"
-	"github.com/user/vecty-project/dispatcher"
 	"github.com/user/vecty-project/store"
 	"github.com/user/vecty-project/store/actions"
+	"github.com/user/vecty-project/store/dispatcher"
 )
 
 func main() {
@@ -16,6 +16,7 @@ func main() {
 	dispatcher.Register(store.OnAction)
 
 	attachItemsStorage()
+
 	body := &components.Body{
 		Ctx: store.Ctx,
 	}
