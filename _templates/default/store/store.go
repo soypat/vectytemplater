@@ -20,7 +20,7 @@ func OnAction(action interface{}) {
 	case *actions.PageSelect:
 		oldCtx := Ctx
 		Ctx = actions.Context{
-			Page:     Ctx.Page,
+			Page:     a.Page,
 			Referrer: &oldCtx,
 		}
 

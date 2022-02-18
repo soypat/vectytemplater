@@ -17,7 +17,8 @@ type Context struct {
 type Page int
 
 const (
-	Landing Page = iota
+	PageLanding Page = iota
+	PageNewItem
 )
 
 // PageSelect Navigates view to new page.

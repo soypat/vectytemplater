@@ -20,7 +20,7 @@ func main() {
 		Ctx: store.Ctx,
 	}
 	store.Listeners.Add(body, func(interface{}) {
-		body.Ctx = store.Ctx // Renew context on rerender.
+		body.Ctx = store.Ctx
 		vecty.Rerender(body)
 	})
 	vecty.RenderBody(body)
@@ -29,7 +29,7 @@ func main() {
 // attachItemsStorage provides persistent local storage saved on edits so
 // no data is lost due to bad connection or refreshed page.
 func attachItemsStorage() {
-	const key = "items"
+	const key = "vecty_items"
 	store.Listeners.Add(nil, func(action interface{}) {
 		if _, ok := action.(*actions.NewItem); !ok {
 			// Only save state upon adding an item
