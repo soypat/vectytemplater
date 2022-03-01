@@ -1,12 +1,13 @@
 package components
 
 import (
+	"vecty-templater-project/store"
+	"vecty-templater-project/store/actions"
+	"vecty-templater-project/store/dispatcher"
+
 	"github.com/hexops/vecty"
 	"github.com/hexops/vecty/elem"
 	"github.com/hexops/vecty/event"
-	"github.com/user/vecty-project/store"
-	"github.com/user/vecty-project/store/actions"
-	"github.com/user/vecty-project/store/dispatcher"
 )
 
 type Body struct {

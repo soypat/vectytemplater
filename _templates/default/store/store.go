@@ -1,8 +1,8 @@
 package store
 
 import (
-	"github.com/user/vecty-project/store/actions"
-	"github.com/user/vecty-project/store/storeutil"
+	"vecty-templater-project/store/actions"
+	"vecty-templater-project/store/storeutil"
 )
 
 var (

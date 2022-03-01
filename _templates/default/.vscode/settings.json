@@ -2,5 +2,6 @@
     "go.toolsEnvVars": {
         "GOOS":"js",
         "GOARCH":"wasm",
-    }
+    },
+    // "go.buildTags": "js", // Not necessary if developing only for browser target.
 }

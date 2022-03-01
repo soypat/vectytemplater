@@ -1,11 +1,12 @@
 package components
 
 import (
+	"vecty-templater-project/store/actions"
+	"vecty-templater-project/store/dispatcher"
+
 	"github.com/hexops/vecty"
 	"github.com/hexops/vecty/elem"
 	"github.com/hexops/vecty/event"
-	"github.com/user/vecty-project/store/actions"
-	"github.com/user/vecty-project/store/dispatcher"
 )
 
 type NewItemView struct {
@@ -18,14 +19,19 @@ func (l *NewItemView) Render() vecty.ComponentOrHTML {
 
 	return elem.Form(
 		vecty.Markup(
+			// PreventDefault prevents the Form from navigating away from page.
 			event.Submit(l.addItem).PreventDefault(),
 		),
+		elem.Label(vecty.Text("Press enter to add item.")),
 		l.input,
 	)
 }
 
 func (l *NewItemView) addItem(e *vecty.Event) {
 	val := l.input.Node().Get("value").String()
+	if val == "" {
+		return // do not add empty items.
+	}
 	dispatcher.Dispatch(&actions.NewItem{Item: val}) // add new item
 	dispatcher.Dispatch(&actions.Back{})             // Back to previous page.
 }

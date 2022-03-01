@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"syscall/js"
 
+	"vecty-templater-project/components"
+	"vecty-templater-project/store"
+	"vecty-templater-project/store/actions"
+	"vecty-templater-project/store/dispatcher"
+
 	"github.com/hexops/vecty"
-	"github.com/user/vecty-project/components"
-	"github.com/user/vecty-project/store"
-	"github.com/user/vecty-project/store/actions"
-	"github.com/user/vecty-project/store/dispatcher"
 )
 
 func main() {
