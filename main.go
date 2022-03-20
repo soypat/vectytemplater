@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 
 	"github.com/soypat/rebed"
 )
@@ -26,14 +27,15 @@ func main() {
 }
 
 func run(args []string) (err error) {
-	if len(args) < 1 {
-		usage("")
-		return errors.New("no output directory specified")
-	}
 	template := flag.String("template", "default", "template name.")
-	err = flag.CommandLine.Parse(args[1:])
+	err = flag.CommandLine.Parse(args)
 	if err != nil {
 		return err
+	}
+	args = flag.Args()
+	if len(args) != 1 {
+		usage("")
+		return errors.New("vecty templater requires only one argument as output directory, got: " + strconv.Itoa(len(args)))
 	}
 	workDir, err := os.Getwd()
 	if err != nil {
