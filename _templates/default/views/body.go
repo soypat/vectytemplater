@@ -1,4 +1,4 @@
-package components
+package views
 
 import (
 	"vecty-templater-project/store"
@@ -24,12 +24,12 @@ func (b *Body) Render() vecty.ComponentOrHTML {
 				vecty.Markup(event.Click(b.newItem)),
 				vecty.Text("New item"),
 			)),
-			&LandingView{
+			&Landing{
 				Items: store.Items,
 			},
 		)
 	case actions.PageNewItem:
-		mainContent = &NewItemView{}
+		mainContent = &NewItem{}
 	default:
 		panic("unknown Page")
 	}

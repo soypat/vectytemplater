@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"syscall/js"
 
-	"vecty-templater-project/components"
 	"vecty-templater-project/store"
 	"vecty-templater-project/store/actions"
 	"vecty-templater-project/store/dispatcher"
+	"vecty-templater-project/views"
 
 	"github.com/hexops/vecty"
 )
@@ -18,7 +18,7 @@ func main() {
 
 	attachItemsStorage()
 
-	body := &components.Body{
+	body := &views.Body{
 		Ctx: store.Ctx,
 	}
 	store.Listeners.Add(body, func(interface{}) {

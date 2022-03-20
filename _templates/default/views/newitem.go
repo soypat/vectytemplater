@@ -1,4 +1,4 @@
-package components
+package views
 
 import (
 	"vecty-templater-project/store/actions"
@@ -9,12 +9,12 @@ import (
 	"github.com/hexops/vecty/event"
 )
 
-type NewItemView struct {
+type NewItem struct {
 	vecty.Core
 	input *vecty.HTML
 }
 
-func (l *NewItemView) Render() vecty.ComponentOrHTML {
+func (l *NewItem) Render() vecty.ComponentOrHTML {
 	l.input = elem.Input()
 
 	return elem.Form(
@@ -27,7 +27,7 @@ func (l *NewItemView) Render() vecty.ComponentOrHTML {
 	)
 }
 
-func (l *NewItemView) addItem(e *vecty.Event) {
+func (l *NewItem) addItem(e *vecty.Event) {
 	val := l.input.Node().Get("value").String()
 	if val == "" {
 		return // do not add empty items.
