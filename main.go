@@ -15,6 +15,9 @@ import (
 var (
 	//go:embed _templates/default
 	defaultFS embed.FS
+
+	//go:embed _templates/websocket-cli
+	websocketFS embed.FS
 )
 
 func main() {
@@ -30,7 +33,7 @@ func run(args []string) (err error) {
 		usage("")
 		return errors.New("showing help for vecty templater")
 	}
-	template := flag.String("template", "default", "template name.")
+	template := flag.String("template", "default", "template name. \"default\" or \"websocket\"")
 	err = flag.CommandLine.Parse(args[1:])
 	if err != nil {
 		return err
@@ -64,6 +67,8 @@ func run(args []string) (err error) {
 	switch *template {
 	case "default":
 		err = rebed.Create(defaultFS, ".")
+	case "websocket-cli":
+		err = rebed.Create(websocketFS, ".")
 	default:
 		err = errors.New("template " + *template + " not found")
 	}
@@ -93,9 +98,9 @@ func run(args []string) (err error) {
 }
 
 func usage(command string) {
-	fmt.Fprintf(os.Stderr, "vectytemplater usage: %s output [-template=<name>]\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "vectytemplater usage: %s <output> [-template=<name>]\n", os.Args[0])
 	fmt.Fprintln(os.Stderr, "flags:")
-	fmt.Fprintln(os.Stderr, "    template  template name. Available: [\"default\"]")
+	fmt.Fprintln(os.Stderr, "    template  template name. Available: [\"default\", \"websocket\"]")
 }
 
 const gomod = `module vecty-templater-project

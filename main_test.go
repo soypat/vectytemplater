@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"os"
 	"testing"
 )
@@ -23,9 +24,25 @@ func TestMain(t *testing.M) {
 	}
 }
 
-func TestRun(t *testing.T) {
-	err := run([]string{"thedir"})
+func TestDefault(t *testing.T) {
+	resetFlags()
+	err := run([]string{"default"})
 	if err != nil {
 		t.Fatal(err)
 	}
+}
+
+func TestWebsocket(t *testing.T) {
+	resetFlags()
+	err := run([]string{"ws", "-template=websocket-cli"})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+var blankCMDLine = *flag.CommandLine
+
+func resetFlags() {
+	cmdLine := blankCMDLine
+	flag.CommandLine = &cmdLine
 }
