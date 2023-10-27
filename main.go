@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 
 	"github.com/soypat/rebed"
 )
@@ -92,6 +93,12 @@ func run(args []string) (err error) {
 	fmt.Fprint(os.Stdout, string(out))
 	err = os.Rename(tmpOutput, targetDir)
 	if err != nil {
+		switch runtime.GOOS {
+		case "windows":
+			err = exec.Command("xcopy", tmpOutput, targetDir, "/E", "/I", "/Y").Run()
+		case "linux", "darwin":
+			err = exec.Command("cp", "-r", tmpOutput, targetDir).Run()
+		}
 		return err
 	}
 	return nil
